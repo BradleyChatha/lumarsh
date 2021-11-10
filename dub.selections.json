@@ -1,0 +1,14 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"bindbc-loader": "0.3.2",
+		"bindbc-lua": "0.4.1",
+		"jcli": "0.22.4",
+		"libbcds": "0.1.2",
+		"libbcfmt": "0.1.2",
+		"libbclog": "0.2.1",
+		"lumars": "1.0.2",
+		"silly": "1.1.1",
+		"taggedalgebraic": "0.11.22"
+	}
+}

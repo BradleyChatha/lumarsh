@@ -1,0 +1,33 @@
+module api.execute;
+
+import lumars, api;
+
+string executeLuaString(string text)
+{
+    auto state = makeState();
+
+    try
+    {
+        state.doString(text);
+        return null;
+    }
+    catch(Exception ex)
+    {
+        version(release)
+            return ex.msg;
+        else
+            throw ex;
+    }
+}
+
+private:
+
+LuaState* makeState()
+{
+    LuaState* state = new LuaState(null);
+    state.registerPathApi();
+    state.registerFsApi();
+    state.registerProcApi();
+
+    return state;
+}

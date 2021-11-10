@@ -1,0 +1,7 @@
+name "lumarsh"
+description "Use LUA for shell scripting"
+authors "Bradley Chatha"
+copyright "Copyright © 2021, Bradley Chatha"
+license "MIT"
+dependency "lumars" version="~>1.0.2"
+dependency "jcli" version="~>0.22.4"

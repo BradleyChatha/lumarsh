@@ -1,0 +1,18 @@
+---
+kind: pipeline
+type: docker
+name: Build & Release
+
+steps:
+  - name: Build
+    image: dlangchina/dlang-dmd
+    commands:
+      - dub build -b release
+  - name: Release
+    image: plugins/github-release
+    settings:
+      api_key:
+        from_secret: GITHUB_API_KEY
+      files: ./lumarsh
+    when:
+      event: tag

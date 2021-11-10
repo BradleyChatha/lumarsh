@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/lumarsh
+lumarsh.so
+lumarsh.dylib
+lumarsh.dll
+lumarsh.a
+lumarsh.lib
+lumarsh-test-*
+*.exe
+*.o
+*.obj
+*.lst
