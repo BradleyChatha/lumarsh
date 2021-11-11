@@ -10,7 +10,7 @@ Either compile it yourself with `dub build -b release` or fetch it from the late
 e.g.
 
 ```bash
-curl -i lumarsh -L https://github.com/BradleyChatha/lumarsh/releases/download/v0.1.0/lumarsh
+curl -o lumarsh -L https://github.com/BradleyChatha/lumarsh/releases/download/v0.1.0/lumarsh
 chmod +x lumarsh
 mv lumarsh /usr/local/bin
 ```
@@ -41,7 +41,7 @@ to the output of `luarocks path --lua-version 5.1`.
 
 When install packages, make sure to pass `--lua-version 5.1` into luarocks, otherwise it might not be in the correct location.
 
-If you're getting an error such as `cannot find module luarocks.loader`, then try running the following command:
+If you're getting an error such as `cannot find module luarocks.loader`, then try the following command:
 
 ```shell
 luarocks install luarocks --lua-version 5.1
