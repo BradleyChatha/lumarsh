@@ -48,12 +48,12 @@ LuaState* makeState()
     state.registerPathApi();
     state.registerFsApi();
     state.registerProcApi();
-    detectLuaRocks();
+    detectLuaRocks(state);
 
     return state;
 }
 
-void detectLuaRocks()
+void detectLuaRocks(LuaState* lua)
 {
     import std.process;
 
@@ -61,6 +61,11 @@ void detectLuaRocks()
     if(res.status != 0)
         return;
 
-    environment["LUA_PATH"] = executeShell("luarocks path --lua-version 5.1 --lr-path").output;
-    environment["LUA_CPATH"] = executeShell("luarocks path --lua-version 5.1 --lr-cpath").output;
+    lua.globalTable.set("LUA_PATH", executeShell("luarocks path --lua-version 5.1 --lr-path").output);
+    lua.globalTable.set("LUA_CPATH", executeShell("luarocks path --lua-version 5.1 --lr-cpath").output);
+    lua.doString(`
+        package.path = package.path .. ";" .. LUA_PATH
+        package.cpath = package.cpath .. ";" .. LUA_CPATH
+        require("luarocks.loader")
+    `);
 }

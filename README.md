@@ -39,6 +39,14 @@ to the output of `luarocks path --lua-version 5.1`.
 
 **Please note lumarsh only supports Lua 5.1 as that's the only version lumars supports**
 
+When install packages, make sure to pass `--lua-version 5.1` into luarocks, otherwise it might not be in the correct location.
+
+If you're getting an error such as `cannot find module luarocks.loader`, then try running the following command:
+
+```shell
+luarocks install luarocks --lua-version 5.1
+```
+
 ## Execution shorthand syntax
 
 Instead of calling `sh.proc.executeEnforceZero` directly, you can instead use the `sh:COMMAND(ARGS)` shortcut:
