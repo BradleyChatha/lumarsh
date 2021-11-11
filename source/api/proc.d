@@ -86,9 +86,18 @@ ShellResult doExec(alias Func, alias PipeFunc)(LuaState* lua, string command, Lu
             else
             {
                 t.pairs!(string, LuaValue, (key, value){
-                    put(value);
-                    actualArgs ~= key;
-                    actualArgs[$-1] = (key.length == 1 ? "-" : "--")~key~"="~actualArgs[$-1];
+                    if(value.isBoolean)
+                    {
+                        if(value.booleanValue)
+                            actualArgs ~= (key.length == 1 ? "-" : "--")~key;
+                        else
+                            actualArgs ~= (key.length == 1 ? "-" : "--")~key~"=false";
+                    }
+                    else
+                    {
+                        put(value);
+                        actualArgs[$-1] = (key.length == 1 ? "-" : "--")~key~"="~actualArgs[$-1];
+                    }
                 });
             }
         }
