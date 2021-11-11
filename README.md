@@ -31,3 +31,40 @@ Lumarsh provides the following libraries:
 * [sh.fs](./source/api/fs.d) - Exposes `std.file` into Lua.
 
 I'm very willing to add more into lumarsh, so please tell me any suggestions you may have.
+
+## Execution shorthand syntax
+
+Instead of calling `sh.proc.executeEnforceZero` directly, you can instead use the `sh:COMMAND(ARGS)` shortcut:
+
+```lua
+print(sh.proc.executeEnforceZero("echo", {"This is what you'd normally do"}).output)
+print(sh:echo("But instead, you can do this!").output)
+```
+
+Additionally, you can chain calls together to pass the output of one command into another's stdin:
+
+```lua
+-- Conventional way (If you don't specify `.output`, then the command's output is sent to stdin)
+print(sh.proc.executeShell("grep", {"import", sh.proc.executeShell("cat", {"./source/api/execute.d"})}).output)
+
+-- Easier way
+print(
+    sh:cat("./source/api/execute.d")
+      :grep("import")
+      .output
+)
+```
+
+Remember, call `.output` on a result object if you don't want it's data being sent to stdin!
+
+```lua
+-- Good
+print(
+    sh:echo("This is my License: ", sh:cat("./LICENSE.md").output).output
+)
+
+-- Bad
+print(
+    sh:echo("This is my License: ", sh:cat("./LICENSE.md")).output
+)
+```

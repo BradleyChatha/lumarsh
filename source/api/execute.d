@@ -24,7 +24,9 @@ private:
 
 LuaState* makeState()
 {
-    LuaState* state = new LuaState(null);
+    import core.stdc.stdlib;
+    auto state = cast(LuaState*)calloc(LuaState.sizeof, 1);
+    *state = LuaState(null);
     state.registerPathApi();
     state.registerFsApi();
     state.registerProcApi();
