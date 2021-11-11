@@ -2,9 +2,9 @@ module api.execute;
 
 import lumars, api;
 
-string executeLuaString(string text)
+string executeLuaString(string text, string[] args)
 {
-    auto state = makeState();
+    auto state = makeState(args);
 
     try
     {
@@ -20,9 +20,9 @@ string executeLuaString(string text)
     }
 }
 
-string executeLuaFile(string file)
+string executeLuaFile(string file, string[] args)
 {
-    auto state = makeState();
+    auto state = makeState(args);
 
     try
     {
@@ -40,7 +40,7 @@ string executeLuaFile(string file)
 
 private:
 
-LuaState* makeState()
+LuaState* makeState(string[] args)
 {
     import core.stdc.stdlib;
     auto state = cast(LuaState*)calloc(LuaState.sizeof, 1);
@@ -50,6 +50,7 @@ LuaState* makeState()
     state.registerProcApi();
     state.registerRegexApi();
     detectLuaRocks(state);
+    state.globalTable.set("LUMARSH_ARGS", args);
 
     return state;
 }
