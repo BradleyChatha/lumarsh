@@ -48,6 +48,19 @@ LuaState* makeState()
     state.registerPathApi();
     state.registerFsApi();
     state.registerProcApi();
+    detectLuaRocks();
 
     return state;
+}
+
+void detectLuaRocks()
+{
+    import std.process;
+
+    const res = executeShell("luarocks --version");
+    if(res.status != 0)
+        return;
+
+    environment["LUA_PATH"] = executeShell("luarocks path --lua-version 5.1 --lr-path").output;
+    environment["LUA_CPATH"] = executeShell("luarocks path --lua-version 5.1 --lr-cpath").output;
 }

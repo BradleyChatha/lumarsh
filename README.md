@@ -17,7 +17,7 @@ mv lumarsh /usr/local/bin
 
 ## Using Lumarsh
 
-There are two ways to use Lumarash:
+There are two ways to use Lumarsh:
 
 * Execute a file `lumarsh file_name`
 * Execute a string `lumarsh execute "print('henlo world!')"`
@@ -31,6 +31,13 @@ Lumarsh provides the following libraries:
 * [sh.fs](./source/api/fs.d) - Exposes `std.file` into Lua.
 
 I'm very willing to add more into lumarsh, so please tell me any suggestions you may have.
+
+## Luarocks support
+
+If [luarocks](https://luarocks.org/) can be detected then lumarsh will set the `LUA_PATH` and `LUA_CPATH` variables
+to the output of `luarocks path --lua-version 5.1`.
+
+**Please note lumarsh only supports Lua 5.1 as that's the only version lumars supports**
 
 ## Execution shorthand syntax
 
