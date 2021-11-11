@@ -10,7 +10,7 @@ Either compile it yourself with `dub build -b release` or fetch it from the late
 e.g.
 
 ```bash
-curl -o lumarsh -L https://github.com/BradleyChatha/lumarsh/releases/download/v0.1.6/lumarsh
+curl -o lumarsh -L https://github.com/BradleyChatha/lumarsh/releases/download/v0.1.7/lumarsh
 chmod +x lumarsh
 mv lumarsh /usr/local/bin
 ```
@@ -21,6 +21,14 @@ There are two ways to use Lumarsh:
 
 * Execute a file `lumarsh file_name`
 * Execute a string `lumarsh execute "print('henlo world!')"`
+
+Additionally any extra args are directly passed into the script via the `LUMARSH_ARGS` global variable:
+
+```lua
+for i,v in ipairs(LUMARSH_ARGS) do
+    print(i,v)
+end
+```
 
 ## Library
 
