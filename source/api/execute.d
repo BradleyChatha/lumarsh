@@ -20,6 +20,24 @@ string executeLuaString(string text)
     }
 }
 
+string executeLuaFile(string file)
+{
+    auto state = makeState();
+
+    try
+    {
+        state.doFile(file);
+        return null;
+    }
+    catch(Exception ex)
+    {
+        version(release)
+            return ex.msg;
+        else
+            throw ex;
+    }
+}
+
 private:
 
 LuaState* makeState()
