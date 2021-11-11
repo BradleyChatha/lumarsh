@@ -29,6 +29,7 @@ Lumarsh provides the following libraries:
 * [sh.path](./source/api/path.d) - Exposes `std.path` into Lua.
 * [sh.proc](./source/api/proc.d) - Exposes `std.process` into Lua.
 * [sh.fs](./source/api/fs.d) - Exposes `std.file` into Lua.
+* [sh.regex](./source/api/regex.d) - Exposes `std.regex` into Lua.
 
 I'm very willing to add more into lumarsh, so please tell me any suggestions you may have.
 

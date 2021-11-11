@@ -48,6 +48,7 @@ LuaState* makeState()
     state.registerPathApi();
     state.registerFsApi();
     state.registerProcApi();
+    state.registerRegexApi();
     detectLuaRocks(state);
 
     return state;
