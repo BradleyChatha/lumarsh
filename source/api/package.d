@@ -5,4 +5,5 @@ public import
     api.path,
     api.fs,
     api.proc,
-    api.regex;
+    api.regex,
+    api.json;

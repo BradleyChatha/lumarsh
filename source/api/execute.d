@@ -49,6 +49,7 @@ LuaState* makeState(string[] args)
     state.registerFsApi();
     state.registerProcApi();
     state.registerRegexApi();
+    state.registerJsonApi();
     detectLuaRocks(state);
     state.globalTable.set("LUMARSH_ARGS", args);
 
