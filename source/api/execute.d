@@ -53,6 +53,7 @@ LuaState* makeState(string[] args)
     detectLuaRocks(state);
     state.globalTable.set("LUMARSH_ARGS", args);
     state.doString(`sh.echo = true`);
+    state.doString(`sh.cd = function() error("'cd' doesn't work, please use sh.fs.chdir") end`);
 
     return state;
 }
