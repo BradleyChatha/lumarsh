@@ -52,6 +52,7 @@ LuaState* makeState(string[] args)
     state.registerJsonApi();
     detectLuaRocks(state);
     state.globalTable.set("LUMARSH_ARGS", args);
+    state.doString(`sh.echo = true`);
 
     return state;
 }

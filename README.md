@@ -38,6 +38,7 @@ Lumarsh provides the following libraries:
 * [sh.proc](./source/api/proc.d) - Exposes `std.process` into Lua.
 * [sh.fs](./source/api/fs.d) - Exposes `std.file` into Lua.
 * [sh.regex](./source/api/regex.d) - Exposes `std.regex` into Lua.
+* [sh.json](./source/api/json.d) - Exposes `std.json` into Lua.
 
 I'm very willing to add more into lumarsh, so please tell me any suggestions you may have.
 
@@ -92,3 +93,9 @@ print(
     sh:echo("This is my License: ", sh:cat("./LICENSE.md")).output
 )
 ```
+
+## Command echoing
+
+By default lumarsh will echo the output of any command it runs.
+
+To disable this, please set `sh.echo` to false.

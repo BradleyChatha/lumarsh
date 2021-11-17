@@ -1,6 +1,6 @@
 module api.proc;
 
-import lumars, std.process, std.typecons, std.format;
+import lumars, std.process, std.typecons, std.format, std.stdio;
 
 struct ShellResult
 {
@@ -113,12 +113,16 @@ ShellResult doExec(alias Func, alias PipeFunc)(LuaState* lua, string command, Lu
     if(!pipeData)
     {
         const res = Func(commString);
+        if(lua.globalTable.get!LuaTable("sh").get!bool("echo"))
+            writeln(res.output);
         return ShellResult(res.output, res.status);
     }
     else
     {
         const addition = escapeShellCommand("echo", pipeData);
         const res = Func(addition~" | "~commString, null, Config(Config.Flags.retainStderr | Config.Flags.retainStdout));
+        if(lua.globalTable.get!LuaTable("sh").get!bool("echo"))
+            writeln(res.output);
         return ShellResult(res.output, res.status);
     }
 }
