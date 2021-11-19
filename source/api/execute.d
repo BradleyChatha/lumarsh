@@ -54,6 +54,7 @@ LuaState* makeState(string[] args)
     state.globalTable.set("LUMARSH_ARGS", args);
     state.doString(`sh.echo = true`);
     state.doString(`sh.cd = function() error("'cd' doesn't work, please use sh.fs.chdir") end`);
+    state.doString(import("libs/luafun.lua"));
 
     return state;
 }

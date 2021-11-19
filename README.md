@@ -32,6 +32,9 @@ end
 
 ## Library
 
+While Lumarsh does support [luarocks](#luarocks-support) my aim is to not have to rely on it for
+most operations, so Lumarsh provides a decent set of libraries that are helpful for processing data.
+
 Lumarsh provides the following libraries:
 
 * [sh.path](./source/api/path.d) - Exposes `std.path` into Lua.
@@ -39,6 +42,11 @@ Lumarsh provides the following libraries:
 * [sh.fs](./source/api/fs.d) - Exposes `std.file` into Lua.
 * [sh.regex](./source/api/regex.d) - Exposes `std.regex` into Lua.
 * [sh.json](./source/api/json.d) - Exposes `std.json` into Lua.
+
+Additionally, the following third party libraries are bundled with Lumarsh:
+
+* [luafun](https://github.com/luafun/luafun) - Provides high-performance functional programming
+  * `luafun` is added into the global scope, so you can simply go `range(0, 10, 2):each(print)` easily.
 
 I'm very willing to add more into lumarsh, so please tell me any suggestions you may have.
 
@@ -49,7 +57,7 @@ to the output of `luarocks path --lua-version 5.1`.
 
 **Please note lumarsh only supports Lua 5.1 as that's the only version lumars supports**
 
-When install packages, make sure to pass `--lua-version 5.1` into luarocks, otherwise it might not be in the correct location.
+When installing packages, make sure to pass `--lua-version 5.1` into luarocks, otherwise it might not be in the correct location.
 
 If you're getting an error such as `cannot find module luarocks.loader`, then try the following command:
 
