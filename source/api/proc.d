@@ -1,6 +1,6 @@
 module api.proc;
 
-import lumars, std.process, std.typecons, std.format, std.stdio;
+import lumars, api, std.process, std.typecons, std.format, std.stdio;
 
 struct ShellResult
 {
@@ -10,7 +10,7 @@ struct ShellResult
 
 void registerProcApi(LuaState* lua)
 {
-    lua.register!(
+    lua.registerAndDocument!(
         "execute", doExec!(execute, pipeProcess),
         "executeShell", doExec!(executeShell, pipeShell),
         "executeEnforceZero",  (LuaState* lua, string command, LuaValue[] args) { 

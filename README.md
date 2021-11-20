@@ -10,7 +10,7 @@ Either compile it yourself with `dub build -b release` or fetch it from the late
 e.g.
 
 ```bash
-curl -o lumarsh -L https://github.com/BradleyChatha/lumarsh/releases/download/v0.1.7/lumarsh
+curl -o lumarsh -L https://github.com/BradleyChatha/lumarsh/releases/download/v0.2.0/lumarsh
 chmod +x lumarsh
 mv lumarsh /usr/local/bin
 ```
@@ -34,6 +34,8 @@ end
 
 While Lumarsh does support [luarocks](#luarocks-support) my aim is to not have to rely on it for
 most operations, so Lumarsh provides a decent set of libraries that are helpful for processing data.
+
+You can see an overview of the API [here](API.md).
 
 Lumarsh provides the following libraries:
 

@@ -1,10 +1,10 @@
 module api.json;
 
-import lumars, std.json, std.array;
+import lumars, api, std.json, std.array;
 
 void registerJsonApi(LuaState* lua)
 {
-    lua.register!(
+    lua.registerAndDocument!(
         "parse", parse,
         "toString", toString
     )("sh.json");

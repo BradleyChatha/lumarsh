@@ -1,10 +1,10 @@
 module api.fs;
 
-import lumars, std.file, std.exception, std.conv, std.algorithm, std.array;
+import lumars, api, std.file, std.exception, std.conv, std.algorithm, std.array;
 
 void registerFsApi(LuaState* lua)
 {
-    lua.register!(
+    lua.registerAndDocument!(
         "append", (LuaState* l, string file, LuaValue v) {
             enforce(v.isTable || v.isText, "Expected parameter 2 to be a table or a string.");
             if(v.isText)

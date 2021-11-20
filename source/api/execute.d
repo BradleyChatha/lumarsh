@@ -38,7 +38,66 @@ string executeLuaFile(string file, string[] args)
     }
 }
 
-private:
+bool g_genDocs;
+string g_docs;
+package void registerAndDocument(Args...)(LuaState* state, string name)
+{
+    import std.format, std.traits;
+
+    state.register!Args(name);
+    if(!g_genDocs)
+        return;
+
+    g_docs ~= "## %s\n\n".format(name);
+
+    static foreach(i; 0..Args.length / 2)
+    {{
+        const Name = Args[i*2];
+        alias Func = Args[i*2+1];
+        string args;
+        string ret;
+
+        alias RetT = ReturnType!Func;
+        static if(is(RetT == LuaValue))
+            ret = "any";
+        else static if(is(RetT == struct))
+        {
+            ret ~= "{";
+            static foreach(i, member; __traits(allMembers, RetT))
+            {
+                ret ~= typeof(__traits(getMember, RetT, member)).stringof;
+                ret ~= " ";
+                ret ~= member;
+                
+                static if(i != __traits(allMembers, RetT).length-1)
+                    ret ~= ", ";
+            }
+            ret ~= "}";
+        }
+        else
+            ret = RetT.stringof;
+
+        alias Params = Parameters!Func;
+        static foreach(i, param; Params)
+        {
+            static if(!is(param == LuaState*))
+            {
+                static if(is(param == LuaValue))
+                    args ~= "any";
+                else static if(is(param == LuaValue[]))
+                    args ~= "any[]";
+                else
+                    args ~= param.stringof;
+                static if(i != Params.length-1)
+                    args ~= ", ";
+            }
+        }
+
+        g_docs ~= "* %s %s(%s)\n".format(ret, Name, args);
+    }}
+
+    g_docs ~= "\n\n";
+}
 
 LuaState* makeState(string[] args)
 {

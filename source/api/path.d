@@ -1,10 +1,10 @@
 module api.path;
 
-import lumars, std.path, std.file, std.array;
+import lumars, api, std.path, std.file, std.array;
 
 void registerPathApi(LuaState* lua)
 {
-    lua.register!(
+    lua.registerAndDocument!(
         "absolutePath",     (string path, string base)  => absolutePath(path, base),
         "absolutePathCwd",  (string path)               => absolutePath(path),
         "buildPath",        (string[] paths)            => buildNormalizedPath(paths),

@@ -1,10 +1,10 @@
 module api.regex;
 
-import lumars, std.regex;
+import lumars, api, std.regex;
 
 void registerRegexApi(LuaState* lua)
 {
-    lua.register!(
+    lua.registerAndDocument!(
         "matchFirst", (string input, string pattern)
         {
             RegexResult ret;
