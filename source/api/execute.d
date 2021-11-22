@@ -1,6 +1,6 @@
 module api.execute;
 
-import lumars, api;
+import lumars, api, std;
 
 string executeLuaString(string text, string[] args)
 {
@@ -23,6 +23,9 @@ string executeLuaString(string text, string[] args)
 string executeLuaFile(string file, string[] args)
 {
     auto state = makeState(args);
+    state.doString(`
+        package.path = package.path .. ";" .. "%s/?.lua"
+    `.format(file.absolutePath.dirName));
 
     try
     {
