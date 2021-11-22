@@ -77,7 +77,7 @@ package void registerAndDocument(Args...)(LuaState* state, string name)
         else
             ret = RetT.stringof;
 
-        alias Params = Parameters!Func;
+        static if(is(typeof(Func) Params == __parameters))
         static foreach(i, param; Params)
         {
             static if(!is(param == LuaState*))
@@ -88,6 +88,7 @@ package void registerAndDocument(Args...)(LuaState* state, string name)
                     args ~= "any[]";
                 else
                     args ~= param.stringof;
+                args ~= " "~__traits(identifier, Params[i..i+1]);
                 static if(i != Params.length-1)
                     args ~= ", ";
             }
