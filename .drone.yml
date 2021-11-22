@@ -8,6 +8,7 @@ steps:
     image: dlangchina/dlang-dmd
     commands:
       - dub build -b release
+      - strip ./lumarsh
   - name: Release
     image: plugins/github-release
     settings:
