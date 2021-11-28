@@ -10,7 +10,7 @@ Either compile it yourself with `dub build -b release` or fetch it from the late
 e.g.
 
 ```bash
-curl -o lumarsh -L https://github.com/BradleyChatha/lumarsh/releases/download/v0.2.0/lumarsh
+curl -o lumarsh -L https://github.com/BradleyChatha/lumarsh/releases/download/v0.2.2/lumarsh
 chmod +x lumarsh
 mv lumarsh /usr/local/bin
 ```
