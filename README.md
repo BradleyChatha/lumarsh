@@ -35,7 +35,7 @@ end
 While Lumarsh does support [luarocks](#luarocks-support) my aim is to not have to rely on it for
 most operations, so Lumarsh provides a decent set of libraries that are helpful for processing data.
 
-You can see an overview of the API [here](API.md).
+An [EmmyLua](./api.lua) file is provided for editors with EmmyLua support, which serves as an overview of the API.
 
 Lumarsh provides the following libraries:
 
