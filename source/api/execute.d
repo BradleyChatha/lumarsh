@@ -24,8 +24,8 @@ string executeLuaFile(string file, string[] args)
 {
     auto state = makeState(args);
     state.doString(`
-        package.path = package.path .. ";" .. "%s/?.lua"
-    `.format(file.absolutePath.dirName));
+        package.path = package.path .. ";" .. "%s/?.lua;" .. "%s/?"
+    `.format(file.absolutePath.dirName, file.absolutePath.dirName));
 
     try
     {

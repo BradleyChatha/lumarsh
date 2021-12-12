@@ -1,6 +1,6 @@
 module api.proc;
 
-import lumars, api, std.process, std.typecons, std.format, std.stdio;
+import lumars, api, std.process, std.typecons, std.format, std.stdio, jcli.text;
 
 struct ShellResult
 {
@@ -55,6 +55,21 @@ void registerProcApi(LuaState* lua)
         end
 
         sh = setmetatable(sh, shmeta)
+
+        function sh.proc.bash(string_or_array)
+            if type(string_or_array) == 'string' then
+                string_or_array = {string_or_array}
+            end
+
+            local results = {}
+
+            for _,v in ipairs(string_or_array) do
+                local res = sh:bash('-c', v)
+                table.insert(results, res.output)
+            end
+
+            return results
+        end
     `);
 }
 
@@ -109,6 +124,8 @@ ShellResult doExec(alias Func, alias PipeFunc)(LuaState* lua, string command, Lu
         put(arg);
 
     const commString = escapeShellCommand(command~actualArgs);
+    if(lua.globalTable.get!LuaTable("sh").get!bool("echo"))
+        writeln(commString.ansi.fg(Ansi4BitColour.green));
 
     if(!pipeData)
     {

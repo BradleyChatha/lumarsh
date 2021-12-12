@@ -9,6 +9,10 @@ struct DocsCommand
     {
         g_genDocs = true;
         makeState(null);
-        writeln(g_docs);
+        writeln(
+            import("libs/luafun_emmy.lua")~'\n'
+            ~import("libs/builtin_emmy.lua")~'\n'
+            ~g_docs
+        );
     }
 }
