@@ -5,14 +5,11 @@ name: Build & Release
 
 steps:
   - name: Build
-    image: dlangchina/dlang-ldc
+    image: dlangchina/dlang-dmd
     commands:
       - dub build -b release
       - strip ./lumarsh
       - mv ./lumarsh ./lumarsh_x86_64
-      - dub build -b release --arch aarch64
-      - strip ./lumarsh
-      - mv ./lumarsh ./lumarsh_aarch64
   - name: Release
     image: plugins/github-release
     settings:
